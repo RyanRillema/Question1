@@ -21,6 +21,11 @@ public class ProcessorTests {
     public void sortStringTest_JavaUtilsSort() {        
         sortStringTest_SharedTests(Backend.Processor.SORTMODE_JAVA_UTILS,"Java Utils");
     }
+
+     @Test
+    public void sortStringTest_TreeMap() {        
+        sortStringTest_SharedTests(Backend.Processor.SORTMODE_TREEMAP,"Treemap Sort");
+    }
     
     public void sortStringTest_SharedTests(Integer sortMode, String modeString) {
         //Shared tests for different sorting algorythms
