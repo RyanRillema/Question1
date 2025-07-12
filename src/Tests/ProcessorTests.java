@@ -8,17 +8,23 @@ import org.junit.Test;
 public class ProcessorTests {
         
     @Test
-    public void sortStringTest() {
-
+    public void sortStringTest_InvlaidMode() {
         sortStringTest_InvalidMode(0,"Invalid Mode");
+    }
 
-        //TODO: Remove this test after adding an algo
-        sortStringTest_SharedTests(0,"None");
+    @Test
+    public void sortStringTest_BubbleSort() {        
+        sortStringTest_SharedTests(Backend.Processor.SORTMODE_BUBBLE,"Bubble Sort");
+    }
 
+    @Test
+    public void sortStringTest_JavaUtilsSort() {        
+        sortStringTest_SharedTests(Backend.Processor.SORTMODE_JAVA_UTILS,"Java Utils");
     }
     
     public void sortStringTest_SharedTests(Integer sortMode, String modeString) {
         //Shared tests for different sorting algorythms
+        
         long startTime = System.nanoTime();
 
         // Simple test cases
@@ -58,6 +64,10 @@ public class ProcessorTests {
         assertEquals("aaabcceeeeeffhiiiiklllnnnnooooppprrrrssttttuuy", result);
         result = Processor.sortString("The café sells pâté, piñata, and açai but we must pay in € :(",sortMode);
         assertEquals("aaaaaaabcdeeefhiiillmnnpppssstttttuuwyâçééñ€", result);
+
+        // Larger strings
+        result = Processor.sortString("pppppppppppp eeeeeeeeeeeeeeeeeeeeeeeeeee qqqqqqqqqqqqqqqqqqqqqqqqq ddddddddddddddddddddd aaaaaaaaaaaaaaaaaaaaaaaaaaaa lllllllllllllllllllllllllllll vvvvvvvvvvvvvvvvvvvvvv ttttttttttttttttttttttttttt bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk $$ sssssssssssssssssssssss zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",sortMode);
+        assertEquals("aaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkklllllllllllllllllllllllllllllppppppppppppqqqqqqqqqqqqqqqqqqqqqqqqqssssssssssssssssssssssstttttttttttttttttttttttttttvvvvvvvvvvvvvvvvvvvvvvzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", result);
         
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
